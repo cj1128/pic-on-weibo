@@ -1,0 +1,79 @@
+/*
+* @Author: dingxijin
+* @Date:   2016-03-24 12:20:01
+* @Last Modified by:   dingxijin
+* @Last Modified time: 2016-03-24 12:25:40
+*/
+
+var webpack = require("webpack")
+var path = require("path")
+
+module.exports = {
+  entry: {
+    app: path.join(__dirname, "entry.jsx"),
+  },
+  output: {
+    path: path.join(__dirname, "chrome"),
+    filename: "[name].js",
+    chunkFilename: "[id].[chunkhash].chunk.js",
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "chrome"),
+    port: 5000,
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    },
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      __DEV__: true,
+    }),
+  ],
+  resolve: {
+    root: [
+      __dirname,
+    ],
+    extensions: ["", ".jsx", ".js", ".styl", ".json"],
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx$/,
+        loader: "babel?cacheDirectory=true&presets[]=es2015&presets[]=stage-0&presets[]=react",
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.js$/,
+        loader: "babel",
+        query: {
+          cacheDirectory: true,
+          presets: ["es2015", "stage-0"],
+        },
+        loader: "babel",
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        loader: "style!css",
+      },
+      {
+        test: /\.styl$/,
+        loader: "style!css!stylus",
+      },
+      {
+        test: /\.(jpg|png|gif|svg)$/,
+        loader: "url?limit=10000&name=images/[path][name].[hash].[ext]",
+      },
+      {
+        test: /\.(json)$/,
+        loader: "json",
+      },
+    ],
+  },
+}

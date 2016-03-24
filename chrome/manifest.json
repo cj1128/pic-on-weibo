@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "图床on微博",
+  "description": "新浪微博图床",
+  "version": "0.0",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon128.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon38.png"
+    },
+   "default_title": "新浪微博图床"
+  },
+  "background":{
+    "scripts":["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+   "tabs"
+   ]
+}
