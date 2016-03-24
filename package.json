@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot --inline --content-base chrome",
-    "build": "webpack -p"
+    "build": "NODE_ENV=production webpack"
   },
   "author": "CJ Ting<fatelovely1128@gmail.com>",
   "license": "ISC",
@@ -16,7 +16,9 @@
     "babel-preset-react": "6.5.0",
     "babel-preset-stage-0": "6.5.0",
     "classnames": "2.2.3",
+    "crc-32": "0.4.0",
     "css-loader": "0.23.1",
+    "dropzone": "4.3.0",
     "file-loader": "0.8.5",
     "jquery": "2.2.1",
     "json-loader": "0.5.4",

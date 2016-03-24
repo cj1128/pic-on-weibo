@@ -1,9 +1,38 @@
 /*
 * @Author: dingxijin
 * @Date:   2016-03-24 12:27:30
-* @Last Modified by:   dingxijin
-* @Last Modified time: 2016-03-24 12:27:49
+* @Last Modified by:   CJ Ting
+* @Last Modified time: 2016-03-24 15:06:40
 */
 
 @import "vendors/normalize.css"
 @import "vendors/skeleton.css"
+
+body
+  background: #E8E9EC
+
+#app
+  padding: 20px
+
+#dropzone
+  background: white
+  margin: auto
+  width: 1200px
+  min-height: 200px
+  border: 2px dashed #0087F7
+
+// for dropzone
+.dz-preview
+  display: flex
+  padding: 20px
+  align-items: center
+.dz-image
+  min-width: 100px
+  > img
+    max-width: 100px
+.dz-details
+  margin-left: 20px
+.dz-error-message
+.dz-success-mark
+.dz-error-mark
+  display: none

@@ -1,8 +1,8 @@
 /*
 * @Author: dingxijin
 * @Date:   2016-03-24 12:20:01
-* @Last Modified by:   dingxijin
-* @Last Modified time: 2016-03-24 12:25:40
+* @Last Modified by:   CJ Ting
+* @Last Modified time: 2016-03-24 15:59:01
 */
 
 var webpack = require("webpack")
@@ -32,7 +32,10 @@ module.exports = {
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
-      __DEV__: true,
+      __DEV__: process.env.NODE_ENV === "production" ?
+        false
+        :
+        true,
     }),
   ],
   resolve: {

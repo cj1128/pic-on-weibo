@@ -25,4 +25,8 @@
 
   历史记录存在浏览器本地存储中。目前没有可靠办法跨设备存储历史记录。
 
+- chrome跨域
+
+  http://stackoverflow.com/questions/9421933/cross-origin-xmlhttprequest-in-chrome-extensions/9422216#9422216
+
   ​
