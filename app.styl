@@ -2,37 +2,75 @@
 * @Author: dingxijin
 * @Date:   2016-03-24 12:27:30
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-03-24 15:06:40
+* @Last Modified time: 2016-03-30 17:49:40
 */
 
 @import "vendors/normalize.css"
-@import "vendors/skeleton.css"
+
+html
+  font-size: 14px
 
 body
   background: #E8E9EC
 
 #app
-  padding: 20px
+  width: 1000px
+  margin: 50px auto
 
-#dropzone
+.dropzone
+  width: 100%
+  cursor: copy
   background: white
-  margin: auto
-  width: 1200px
-  min-height: 200px
   border: 2px dashed #0087F7
-
-// for dropzone
-.dz-preview
   display: flex
-  padding: 20px
+  flex-wrap: wrap
+
+.dropzone--active
+  border: 2px dashed rgba(35,151,55,1)
+
+.placeholder
+  align-self: center
+  margin: 80px auto
+  color: rgba(102,102,102,0.5)
+
+.tip
+  font-size: 0.9rem
+  margin: 20px
+  text-align: center
+  color: rgba(102,102,102,0.5)
+
+.item
+  width: 100%
+  padding: 20px 40px
+  display: flex
   align-items: center
-.dz-image
-  min-width: 100px
   > img
     max-width: 100px
-.dz-details
-  margin-left: 20px
-.dz-error-message
-.dz-success-mark
-.dz-error-mark
-  display: none
+
+.item__status
+  margin-left: auto
+  color: gray
+
+.item__result
+  margin-left: auto
+  padding: 0
+  cursor: default
+  > li
+    display: flex
+    padding: 10px 0
+    align-items: center
+    > span:first-child
+      margin-right: 20px
+    > span:nth-child(2)
+      width: 500px
+      margin-right: 20px
+    > span:last-child
+      border-radius: 5px
+      padding: 5px 20px
+      color: #0087f7
+      text-align: center
+      border: solid 1px #0087f7
+      cursor: pointer
+      &:hover
+        color: white
+        background: #0087f7
