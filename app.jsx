@@ -2,7 +2,7 @@
 * @Author: dingxijin
 * @Date:   2016-03-24 12:22:22
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-03-31 18:39:53
+* @Last Modified time: 2016-03-31 18:56:25
 */
 
 import "./app.styl"
@@ -11,6 +11,7 @@ import Dropzone from "react-dropzone"
 import "sweetalert/dist/sweetalert.css"
 import swal from "sweetalert"
 import { pid2url, sendRequest } from "utils"
+import Clipboard from "clipboard"
 
 export default class App extends React.Component {
   state = {
@@ -31,7 +32,7 @@ export default class App extends React.Component {
         var source = window.URL.createObjectURL(blob)
         blob.preview = source
         this.setState({
-          files: [blob]
+          files: [blob],
         }, this.uploadFiles)
       }
     }
@@ -95,35 +96,30 @@ export default class App extends React.Component {
   }
 }
 
-const Item = ({file, url}) =>
-  <div
-    className="item"
-  >
-    <img src={ file.preview } />
-    {
-      url ?
-        <ItemResult url={ url } />
-        :
-        <span className="item__status">
-          上传中...
-        </span>
-    }
-  </div>
-
-class ItemResult extends React.Component {
+class Item extends React.Component {
   static propTypes = {
-    url: React.PropTypes.object.isRequired,
+    file: React.PropTypes.object.isRequired,
+    url: React.PropTypes.object,
+  }
+
+  componentDidMount() {
+    new Clipboard(".copy", {
+      target: function(trigger) {
+        return trigger.parentNode.children[1]
+      },
+    })
   }
 
   handleClick(evt) {
     evt.stopPropagation()
   }
 
-  render() {
+  renderResults() {
     const url = this.props.url
     return (
       <ul
-        className="item__result"
+        ref="results"
+        className="item__results"
         onClick={ this.handleClick }
       >
         <li>
@@ -131,23 +127,42 @@ class ItemResult extends React.Component {
           <span>
             { url.large }
           </span>
-          <span>复制</span>
+          <span className="copy">复制</span>
         </li>
         <li>
           <span>中图</span>
           <span>
             { url.middle }
           </span>
-          <span>复制</span>
+          <span className="copy">复制</span>
         </li>
         <li>
           <span>小图</span>
           <span>
             { url.small }
           </span>
-          <span>复制</span>
+          <span className="copy">复制</span>
         </li>
       </ul>
+    )
+  }
+
+  render() {
+    return (
+      <div
+        className="item"
+        onClick={ this.handleClick }
+      >
+        <img src={ this.props.file.preview } />
+        {
+          this.props.url ?
+            this.renderResults()
+            :
+            <span className="item__status">
+              上传中...
+            </span>
+        }
+      </div>
     )
   }
 }

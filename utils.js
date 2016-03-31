@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-03-24 13:39:26
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-03-30 17:59:00
+* @Last Modified time: 2016-03-31 19:19:40
 */
 
 import $ from "jquery"
@@ -48,7 +48,11 @@ export function sendRequest(file, cb) {
         const json = JSON.parse(result.slice(140))
         switch(json.code) {
           case "A20001":
-            cb(new Error("请先登录微博！"))
+            if(json.data.count === -1) {
+              cb(new Error("请先登录微博！"))
+            } else {
+              cb(new Error("文件类型错误！"))
+            }
             break
           case "A00006":
             const pid = json.data.pics.pic_1.pid
