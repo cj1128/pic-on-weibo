@@ -2,7 +2,7 @@
 * @Author: dingxijin
 * @Date:   2016-03-24 12:22:22
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-03-30 18:10:01
+* @Last Modified time: 2016-03-31 18:39:53
 */
 
 import "./app.styl"
@@ -17,23 +17,46 @@ export default class App extends React.Component {
     files: [],
   }
 
-  handleDrop = (files) => {
-    this.setState({files: files}, () => {
-      for(let file of files) {
-        sendRequest(file, (err, url) => {
-          if(err) {
-            this.setState({
-              files: [],
-            }, () => swal(err.message, "", "error"))
-          } else {
-            file.url = url
-            this.setState({
-              files: files
-            })
-          }
-        })
+  componentDidMount() {
+    window.addEventListener("paste", this.handlePaste)
+  }
+
+  handlePaste = (evt) => {
+    var items = evt.clipboardData.items
+    if(!items) return
+
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf("image") !== -1) {
+        var blob = items[i].getAsFile()
+        var source = window.URL.createObjectURL(blob)
+        blob.preview = source
+        this.setState({
+          files: [blob]
+        }, this.uploadFiles)
       }
-    })
+    }
+  }
+
+  handleDrop = (files) => {
+    this.setState({files: files}, this.uploadFiles)
+  }
+
+  uploadFiles() {
+    const files = this.state.files
+    for(let file of files) {
+      sendRequest(file, (err, url) => {
+        if(err) {
+          this.setState({
+            files: [],
+          }, () => swal(err.message, "", "error"))
+        } else {
+          file.url = url
+          this.setState({
+            files: files
+          })
+        }
+      })
+    }
   }
 
   renderFiles() {
