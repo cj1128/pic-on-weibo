@@ -6,6 +6,7 @@
 */
 
 @import "vendors/normalize.css"
+@require "colors"
 
 html
   font-size: 14px
@@ -15,65 +16,19 @@ body
   background: #E8E9EC
   font-size: 100%
 
-#app
+.app
   width: 1000px
   margin: 50px auto
 
-.dropzone
-  width: 100%
-  cursor: copy
-  background: white
-  display: flex
-  border-radius: 5px
-  flex-wrap: wrap
-  box-shadow: 0 0 10px #aaa
+.app__tab
+  padding: 10px 0
+  text-align: right
+  color: $gray
+  > span
+    cursor: pointer
 
-.dropzone--active
-  border: 2px dashed #0087F7
+.app__tab__current
+  color: $main
 
-.placeholder
-  align-self: center
-  margin: 80px auto
-  color: rgba(102,102,102,0.5)
 
-.tip
-  font-size: 0.9rem
-  margin: 20px
-  text-align: center
-  color: rgba(102,102,102,0.5)
 
-.item
-  width: 100%
-  cursor: default
-  padding: 20px 40px
-  display: flex
-  align-items: center
-  > img
-    max-width: 200px
-
-.item__status
-  margin-left: auto
-  color: gray
-
-.item__results
-  margin-left: auto
-  padding: 0
-  > li
-    display: flex
-    padding: 10px 0
-    align-items: center
-    > span:first-child
-      margin-right: 20px
-    > span:nth-child(2)
-      width: 500px
-      margin-right: 20px
-    > span:last-child
-      border-radius: 5px
-      padding: 5px 20px
-      color: #0087f7
-      text-align: center
-      border: solid 1px #0087f7
-      cursor: pointer
-      &:hover
-        color: white
-        background: #0087f7

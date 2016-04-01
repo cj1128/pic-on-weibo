@@ -1,0 +1,67 @@
+/*
+* @Author: CJ Ting
+* @Date:   2016-04-01 14:48:09
+* @Last Modified by:   CJ Ting
+* @Last Modified time: 2016-04-01 14:56:17
+*/
+
+@require "colors"
+
+.upload__dropzone
+  width: 100%
+  cursor: copy
+  background: white
+  display: flex
+  border-radius: 5px
+  flex-wrap: wrap
+  box-shadow: 0 0 10px #aaa
+
+.upload__dropzone--active
+  border: 2px dashed $main
+
+.upload__placeholder
+  align-self: center
+  margin: 80px auto
+  color: $gray
+
+.upload__tip
+  font-size: 0.9rem
+  margin: 20px
+  text-align: center
+  color: $gray
+
+.upload__item
+  width: 100%
+  cursor: default
+  padding: 20px 40px
+  display: flex
+  align-items: center
+  > img
+    max-width: 200px
+
+.upload__item__status
+  margin-left: auto
+  color: gray
+
+.upload__item__results
+  margin-left: auto
+  padding: 0
+  > li
+    display: flex
+    padding: 10px 0
+    align-items: center
+    > span:first-child
+      margin-right: 20px
+    > span:nth-child(2)
+      width: 500px
+      margin-right: 20px
+    > span:last-child
+      border-radius: 5px
+      padding: 5px 20px
+      color: $main
+      text-align: center
+      border: solid 1px $main
+      cursor: pointer
+      &:hover
+        color: white
+        background: $main

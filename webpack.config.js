@@ -2,7 +2,7 @@
 * @Author: dingxijin
 * @Date:   2016-03-24 12:20:01
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-03-24 15:59:01
+* @Last Modified time: 2016-04-01 14:47:28
 */
 
 var webpack = require("webpack")
@@ -67,7 +67,7 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loader: "style!css!stylus",
+        loader: "style!css!stylus?paths[]=./",
       },
       {
         test: /\.(jpg|png|gif|svg)$/,

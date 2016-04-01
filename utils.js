@@ -2,11 +2,18 @@
 * @Author: CJ Ting
 * @Date:   2016-03-24 13:39:26
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-03-31 19:19:40
+* @Last Modified time: 2016-04-01 15:07:11
 */
 
 import $ from "jquery"
 import CRC32 from "crc-32"
+
+function save(url) {
+  const ls = window.localStorage
+  const store = ls.getItem("history") ? JSON.parse(ls.getItem("history")) : []
+  store.push(url)
+  ls.setItem("history", JSON.stringify(store))
+}
 
 // types: bmiddle, large, small
 export function pid2url(pid, type = "large") {
@@ -56,16 +63,21 @@ export function sendRequest(file, cb) {
             break
           case "A00006":
             const pid = json.data.pics.pic_1.pid
-            cb(null, {
+            const url = {
               large: pid2url(pid, "large"),
               middle: pid2url(pid, "bmiddle"),
               small: pid2url(pid, "small"),
-            })
+            }
+            save(url)
+            cb(null, url)
             break
           default:
             cb(new Error("未知错误！"))
         }
-      }
+      },
+      error: (jqXHR, status, err) => {
+        cb(new Error(err))
+      },
     })
   })
 }
