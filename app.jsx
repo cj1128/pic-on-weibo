@@ -82,14 +82,14 @@ export default class App extends React.Component {
           {
             this.state.files.length === 0 ?
               <p className="placeholder">
-                拖拽或复制上传~支持多个文件~
+                点击、拖拽或复制上传~支持多个文件~
               </p>
               :
               this.renderFiles()
           }
         </Dropzone>
         <p className="tip">
-          注意：上传的图片无法删除，请不要上传任何隐私图片。
+          注意：上传前请先登录微博。上传的图片无法删除，请不要上传任何隐私图片。
         </p>
       </div>
     )
