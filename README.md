@@ -7,7 +7,9 @@
 - 拖拽上传，复制上传
 - 批量上传
 - 浏览历史记录（存储在localStorage中）
-- 导出历史记录
+
+
+
 
 
 
@@ -36,7 +38,7 @@
 
 - 图片上传接口？
 
-  图片上传使用的是[http://picupload.service.weibo.com/interface](http://picupload.service.weibo.com/interface) 这个接口。上传之前需要登录微博，上传的图片不会显示在你的微博相册中，也不会和你的任何微博挂钩，完全的“野生图片”。
+  图片上传使用的是[http://picupload.service.weibo.com/interface](http://picupload.service.weibo.com/interface) 接口。上传之前需要登录微博，上传的图片不会显示在你的微博相册中，也不会和你的任何微博挂钩，完全的“野生图片”。
 
 - 换一台电脑没有历史记录？
 
