@@ -2,15 +2,19 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:39:09
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-05 12:30:22
+* @Last Modified time: 2016-04-05 18:54:00
 */
 
 import "./style"
 import React from "react"
 import Clipboard from "clipboard"
 import { IconCopy } from "utils"
+import swal from "sweetalert"
+const LS = window.localStorage
 
 const IconDownload = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAV1BMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/fjXlVDAAAAHHRSTlMAAQUHCQoRGBkcHz9AUFZecYCVqLTK0dPp7ff5cWDvugAAAGlJREFUGNO1zckKwCAMBNDYfdfui/n/76xKDFZKbx1yGB7oAHyk0YhLjB2a/I3JiRzJOrFdFaPwetXBB6QPI43MaWCje7inQpbQu34UQBNbDjBQbz2inndfO8AwKrMX4arstTQUxgy95Qa+KRMWu5MJ+wAAAABJRU5ErkJggg=="
+
+const IconUpload = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAWlBMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/eRmVa5AAAAHXRSTlMAAQMFDhITFhgZHB82OD9AXV5jfouVtNfp7e/3+ZdH8s8AAABkSURBVBjTtc5HDsAgDABBk96d3v3/byYgQMFwzYqDGSFkAJ0YCuCJha7KN+KqjKk2V429WhqLD4vUf39FKXylP7C+iVZ7m9UmYyTnfJPzngH5dSFEF6dEHoTTf9lC2iGrERDqAQeqE26RucCwAAAAAElFTkSuQmCC"
 
 const IconListActive = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAUVBMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/fAwRjQAAAAGnRSTlMAAQIHCx0nKissLjg7paaqvL7Z2uLk7e/5+wGfAG4AAABiSURBVBjTpdDbCoAgEATQSe1+11Lb///QkDI0JALnSYZlPQox6qXEKzMR6QJoFV3ZesC4Awc76An3k8yGpZjM6nbW8q72AbnxziYk+dsj0pczfpF3ZpIqmSDZ36ROBb+UIp3E0hIdQF/DiAAAAABJRU5ErkJggg=="
 
@@ -24,7 +28,7 @@ const IconRemove = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAA
 
 export default class History extends React.Component {
   state = {
-    layout: "grid",
+    layout: "list",
   }
 
   componentDidMount() {
@@ -37,6 +41,48 @@ export default class History extends React.Component {
 
   componentWillUnmount() {
     this.clipboard.destroy()
+  }
+
+  exportHistory() {
+    if(LS.getItem("history")) {
+      window.open().document.write(LS.getItem("history"))
+    } else {
+      swal("当前没有任何历史记录!", "", "error")
+    }
+  }
+
+  importHistory = () => {
+    swal({
+      title: "输入导出的JSON数据",
+      type: "input",
+      showCancelButton: true,
+      closeOnConfirm: false,
+      animation: "slide-from-top",
+      inputPlaceholder: "json data",
+    }, input => {
+      try {
+        const inputArr = JSON.parse(input)
+        const history = JSON.parse(LS.getItem("history")) || []
+        history.push(inputArr)
+        LS.setItem("history", JSON.stringify(history))
+        this.forceUpdate()
+      } catch(e) {
+        swal("输入数据错误！", "", "error")
+      }
+    })
+  }
+
+  clearHistory = () => {
+    swal({
+      title: "确定清除所有历史记录吗?",
+      type: "warning",
+      showCancelButton: true,
+    }, isConfirmed => {
+      if(isConfirmed) {
+        LS.removeItem("history")
+        this.forceUpdate()
+      }
+    })
   }
 
   renderItems(items) {
@@ -88,7 +134,7 @@ export default class History extends React.Component {
   }
 
   render() {
-    const items = JSON.parse(localStorage.getItem("history")) || []
+    const items = JSON.parse(LS.getItem("history")) || []
     let listIcon, gridIcon
     if(this.state.layout === "grid") {
       listIcon = IconListGray
@@ -114,19 +160,22 @@ export default class History extends React.Component {
           </div>
 
           <div className="history__header__btn">
-            <img title="批量下载" src={ IconDownload } />
-            <img title="清除历史" src={ IconRemove } />
+            <img
+              onClick={ this.clearHistory }
+              title="清除"
+              src={ IconRemove }
+            />
           </div>
         </header>
 
         {
           items.length === 0 ?
             <p className="history__tip">
-            暂时没有任何上传记录
+            目前没有任何上传记录
             </p>
             :
             <div
-              className={ this.state.layout === "grid" ? "history__grid-items" : "history__list-items" }
+              className={ `history__${this.state.layout}-items` }
             >
               { this.renderItems(items) }
             </div>

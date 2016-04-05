@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:46:12
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-05 12:31:25
+* @Last Modified time: 2016-04-05 18:41:35
 */
 
 @require "colors"
@@ -26,9 +26,15 @@
   position: absolute
   right: 0
   align-items: center
-  > img:first-child
+  > img
     margin-right: 20px
+    &:last-child
+      margin-right: 0
 
+.history__tip
+  padding: 50px 0
+  text-align: center
+  color: $gray
 
 .history__grid-items
   display: flex
