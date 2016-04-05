@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:51:34
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-05 10:16:16
+* @Last Modified time: 2016-04-05 12:29:50
 */
 
 import "./style.styl"
@@ -10,7 +10,7 @@ import React from "react"
 import Dropzone from "react-dropzone"
 import "sweetalert/dist/sweetalert.css"
 import swal from "sweetalert"
-import { pid2url, sendRequest } from "utils"
+import { pid2url, sendRequest, IconCopy } from "utils"
 import Clipboard from "clipboard"
 
 export default class Upload extends React.Component {
@@ -135,21 +135,33 @@ class Item extends React.Component {
           <span>
             { url.large }
           </span>
-          <span className="upload__copy-btn">复制</span>
+          <img
+            title="复制URL"
+            src={ IconCopy }
+            className="upload__copy-btn"
+          />
         </li>
         <li>
           <span>中图</span>
           <span>
             { url.middle }
           </span>
-          <span className="upload__copy-btn">复制</span>
+          <img
+            title="复制URL"
+            src={ IconCopy }
+            className="upload__copy-btn"
+          />
         </li>
         <li>
           <span>小图</span>
           <span>
             { url.small }
           </span>
-          <span className="upload__copy-btn">复制</span>
+          <img
+            title="复制URL"
+            src={ IconCopy }
+            className="upload__copy-btn"
+          />
         </li>
       </ul>
     )

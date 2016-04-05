@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-03-24 13:39:26
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-01 15:07:11
+* @Last Modified time: 2016-04-05 12:28:42
 */
 
 import $ from "jquery"
@@ -81,3 +81,5 @@ export function sendRequest(file, cb) {
     })
   })
 }
+
+export const IconCopy = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAllBMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/f+/svYAAAAMXRSTlMAAQIDBQYHCAkLDBEUFRgZHh8gIUJFS1ZYYmNmjpSbnaCytMXO0dXZ2uTm6e/z+fv9ErSjVQAAAJ1JREFUGFeVzkkWgkAUQ9GAJYgWonxFbBDseyT735wDQCg9DnzDO8gJAADwtNa6h3ZqS5IsVMu6e9K2bY/9xpzDbkIAqoXucdOREn0/CIKhApxTaqHCJ0nyDCQkyQuAMYsZACGQxyISuoB+zLMaKeX04L5A+oHebYkvXJMkpybmkYiMLBOp698/8coyA91QRERMrPoDI6mKG1zxXYIX1fwXXesnfg0AAAAASUVORK5CYII="

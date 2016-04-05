@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:46:12
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-05 12:19:51
+* @Last Modified time: 2016-04-05 12:31:25
 */
 
 @require "colors"
@@ -65,6 +65,7 @@
   justify-content: space-around
   > img
     max-width: 100%
+    max-height: 100%
 
 .history__item__results
   width: 100%
@@ -78,15 +79,8 @@
     > span:nth-child(2)
       overflow: hidden
       text-overflow: ellipsis
-      max-width: 350px
-    > span:last-child
+      width: 80%
+    > img:last-child
+      width: 20px
       margin-left: auto
-      border-radius: 5px
-      padding: 5px 20px
-      color: $main
-      text-align: center
-      border: solid 1px $main
       cursor: pointer
-      &:hover
-        color: white
-        background: $main

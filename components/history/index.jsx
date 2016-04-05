@@ -2,12 +2,13 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:39:09
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-05 12:11:14
+* @Last Modified time: 2016-04-05 12:30:22
 */
 
 import "./style"
 import React from "react"
 import Clipboard from "clipboard"
+import { IconCopy } from "utils"
 
 const IconDownload = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAV1BMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/fjXlVDAAAAHHRSTlMAAQUHCQoRGBkcHz9AUFZecYCVqLTK0dPp7ff5cWDvugAAAGlJREFUGNO1zckKwCAMBNDYfdfui/n/76xKDFZKbx1yGB7oAHyk0YhLjB2a/I3JiRzJOrFdFaPwetXBB6QPI43MaWCje7inQpbQu34UQBNbDjBQbz2inndfO8AwKrMX4arstTQUxgy95Qa+KRMWu5MJ+wAAAABJRU5ErkJggg=="
 
@@ -41,7 +42,7 @@ export default class History extends React.Component {
   renderItems(items) {
     return items.map(item => <div className="history__item" key={ item.large }>
       <div className="history__img-container">
-        <img src={ item.middle } />
+        <img src={ item.large } />
       </div>
       <ul
         ref="results"
@@ -53,21 +54,33 @@ export default class History extends React.Component {
           <span>
             { item.large }
           </span>
-          <span className="history__copy-btn">复制</span>
+          <img
+            title="复制URL"
+            src={ IconCopy }
+            className="history__copy-btn"
+          />
         </li>
         <li>
           <span>中图</span>
           <span>
             { item.middle }
           </span>
-          <span className="history__copy-btn">复制</span>
+          <img
+            title="复制URL"
+            src={ IconCopy }
+            className="history__copy-btn"
+          />
         </li>
         <li>
           <span>小图</span>
           <span>
             { item.small }
           </span>
-          <span className="history__copy-btn">复制</span>
+          <img
+            title="复制URL"
+            src={ IconCopy }
+            className="history__copy-btn"
+          />
         </li>
       </ul>
     </div>
