@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:51:34
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-01 14:56:17
+* @Last Modified time: 2016-04-05 10:16:16
 */
 
 import "./style.styl"
@@ -107,11 +107,15 @@ class Item extends React.Component {
   }
 
   componentDidMount() {
-    new Clipboard(".upload__copy-btn", {
+    this.clipboard = new Clipboard(".upload__copy-btn", {
       target: function(trigger) {
         return trigger.parentNode.children[1]
       },
     })
+  }
+
+  componentWillUnmount() {
+    this.clipboard.destroy()
   }
 
   handleClick(evt) {
