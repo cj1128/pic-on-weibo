@@ -1,5 +1,11 @@
 #图床on微博
 
+[![Chrome Web Store](http://ww3.sinaimg.cn/large/5fd37818jw1eq7bx4bc4ej20c0038mx9.jpg)](https://chrome.google.com/webstore/detail/%E5%9B%BE%E5%BA%8Aon%E5%BE%AE%E5%8D%9A/opblldeehobgiedgjgamaklagilmkagc/related)
+
+
+
+![](http://ww4.sinaimg.cn/large/9b85365djw1f2my3gabqtg211u0iwkjq.gif)
+
 
 
 ##功能
@@ -11,8 +17,6 @@
 
 
 
-
-
 **注意： 图片一旦上传，无法删除（可能一直保留到微博倒闭那天），请不要上传任何隐私图片。**
 
 
@@ -20,9 +24,12 @@
 
 ##开发
 
-- `git clone`
+- `git clone https://github.com/fate-lovely/pic-on-weibo  `
+- `cd pic-on-weibo`
 - `npm install`
 - `npm run dev`
+- `npm run build  // 打包代码` 
+
 
 
 
@@ -44,6 +51,8 @@
 
   历史记录存在浏览器本地存储中。目前没有可靠办法跨设备存储历史记录。
 
-  ​
 
-  ​
+
+## 致谢
+
+部分代码参考[WeiboPicBed](https://github.com/Suxiaogang/WeiboPicBed)，在此表示感谢。
