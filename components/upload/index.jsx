@@ -2,7 +2,7 @@
 * @Author: CJ Ting
 * @Date:   2016-04-01 14:51:34
 * @Last Modified by:   CJ Ting
-* @Last Modified time: 2016-04-05 12:29:50
+* @Last Modified time: 2016-04-06 12:29:01
 */
 
 import "./style.styl"
@@ -93,7 +93,14 @@ export default class Upload extends React.Component {
           }
         </Dropzone>
         <p className="upload__tip">
-          注意：上传前请先登录微博。上传的图片无法删除，请不要上传任何隐私图片。
+          注意：上传前请先
+          <a
+            target="_blank"
+            href="http://www.weibo.com/login.php"
+          >
+            登录微博
+          </a>
+          。上传的图片无法删除，请不要上传任何隐私图片。
         </p>
       </div>
     )
