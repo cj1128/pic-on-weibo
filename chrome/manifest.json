@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "图床on微博",
-  "description": "新浪微博图床",
-  "version": "0.0",
+  "description": "支持拖拽上传，复制上传，批量上传以及浏览上传历史记录",
+  "version": "1.0",
   "icons": {
     "16": "icon16.png",
     "48": "icon128.png",
@@ -13,14 +13,13 @@
       "19": "icon19.png",
       "38": "icon38.png"
     },
-   "default_title": "新浪微博图床"
+   "default_title": "图床on微博"
   },
   "background":{
     "scripts":["background.js"],
     "persistent": false
   },
   "permissions": [
-    "tabs",
     "http://*/"
    ]
 }
