@@ -1,5 +1,7 @@
 #图床on微博
 
+**2017.1.22：项目废弃。最近微博接口变得十分不稳定，这是微博的问题我无法修复。同时考虑到微博图床上传后的图片无法获取到完整列表也无法删除，故重新开发了[图床on七牛](https://github.com/fate-lovely/pic-on-qiniu)，使用七牛作为存储空间，图片处于完全控制之中，更加好用~**
+
 [![Chrome Web Store](http://ww3.sinaimg.cn/large/5fd37818jw1eq7bx4bc4ej20c0038mx9.jpg)](https://chrome.google.com/webstore/detail/%E5%9B%BE%E5%BA%8Aon%E5%BE%AE%E5%8D%9A/opblldeehobgiedgjgamaklagilmkagc/related)
 
 
