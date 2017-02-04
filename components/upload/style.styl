@@ -11,9 +11,9 @@
   width: 100%
   cursor: copy
   background: white
-  display: flex
+  // display: flex
   border-radius: 5px
-  flex-wrap: wrap
+  // flex-wrap: wrap
   box-shadow: 0 0 10px #aaa
 
 .upload__dropzone--active
@@ -21,7 +21,9 @@
 
 .upload__placeholder
   align-self: center
-  margin: 80px auto
+  margin: 0
+  padding: 80px 20px
+  text-align: center
   color: $gray
 
 .upload__tip
@@ -32,32 +34,37 @@
   a
     color: $main
 
+.upload__loading
+  display: flex
+  align-items: center
+  margin-left: auto
+  > div
+    margin-right: 20px
+    width: 30px
+    height: 30px
+
 .upload__item
-  width: 100%
   cursor: default
   padding: 20px 40px
   display: flex
   align-items: center
   > img
-    max-width: 200px
+    width: 20%
+    margin-right: 10%
 
-.upload__item__status
-  margin-left: auto
-  color: gray
-
-.upload__item__results
-  margin-left: auto
+.upload__item__result
+  width: 70%
   padding: 0
-  > li
-    display: flex
-    padding: 10px 0
-    align-items: center
-    > span:first-child
-      margin-right: 20px
-    > span:nth-child(2)
-      width: 500px
-      margin-right: 20px
-    > img:last-child
-      width: 20px
-      margin-left: auto
-      cursor: pointer
+  display: flex
+  align-items: center
+  justify-content: space-between
+  > span:first-child
+    margin-right: 20px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    color: $main
+  > img:last-child
+    width: 20px
+    margin-left: auto
+    cursor: pointer

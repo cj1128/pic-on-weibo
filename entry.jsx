@@ -5,8 +5,11 @@
 * @Last Modified time: 2016-03-24 12:23:34
 */
 
+import "normalize.css/normalize.css"
+import "toastr/build/toastr.min.css"
 import React from "react"
 import DOM from "react-dom"
+import "global"
 
 import App from "./app.jsx"
 

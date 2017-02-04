@@ -19,7 +19,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, "chrome"),
-    port: 5000,
+    port: 5100,
     stats: {
       colors: true,
       hash: false,
@@ -48,16 +48,11 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx$/,
-        loader: "babel?cacheDirectory=true&presets[]=es2015&presets[]=stage-0&presets[]=react",
+        loader: "babel",
         exclude: /node_modules/,
       },
       {
         test: /\.js$/,
-        loader: "babel",
-        query: {
-          cacheDirectory: true,
-          presets: ["es2015", "stage-0"],
-        },
         loader: "babel",
         exclude: /node_modules/,
       },

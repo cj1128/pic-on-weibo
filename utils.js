@@ -5,26 +5,23 @@
 * @Last Modified time: 2016-04-05 12:28:42
 */
 
-import $ from "jquery"
+import axios from "axios"
 import CRC32 from "crc-32"
+import { saveItem } from "history"
 
-function save(url) {
-  const ls = window.localStorage
-  const store = ls.getItem("history") ? JSON.parse(ls.getItem("history")) : []
-  store.push(url)
-  ls.setItem("history", JSON.stringify(store))
-}
+const UPLOAD_URL = "http://picupload.service.weibo.com/interface/pic_upload.php?mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog"
 
 // types: bmiddle, large, small
-export function pid2url(pid, type = "large") {
-  var url, zone, ext
+export function pid2url(pid) {
+  const type = "large"
+  let url, zone, ext
   if (pid[9] === "w") {
     zone = (CRC32.str(pid) & 3) + 1
     ext = (pid[21] == "g") ? "gif" : "jpg"
     url = `http://ww${zone}.sinaimg.cn/${type}/${pid}.${ext}`
   } else {
     zone = ((pid.substr(-2, 2), 16) & 0xf) + 1
-    url = `http://ss${zone}.sinaimg.cn/${type}/${pid}&690`
+    url = `http://ww${zone}.sinaimg.cn/${type}/${pid}`
   }
   return url
 }
@@ -42,17 +39,15 @@ export function sendRequest(file, cb) {
   const formData = new FormData()
   file2base64(file, (err, data) => {
     formData.append("b64_data", data)
-    $.ajax({
-      method: "POST",
-      url: "http://picupload.service.weibo.com/interface/pic_upload.php?&mime=image%2Fjpeg&data=base64&url=0&markpos=1&logo=&nick=0&marks=1&app=miniblog",
-      processData: false,
-      contentType: false,
-      xhrFields: {
-        withCredentials: __DEV__ ? true : false,
-      },
-      data: formData,
-      success: result => {
-        const json = JSON.parse(result.slice(140))
+    axios.post(UPLOAD_URL, formData, {
+      withCredentials: true,
+    })
+      .then(res => {
+        let text = res.data
+        // response contains some html tags, WTF!
+        text = text.replace(/<.*?\/>/, "")
+        text = text.replace(/<(\w+).*?>.*?<\/\1>/, "")
+        const json = JSON.parse(text)
         switch(json.code) {
           case "A20001":
             if(json.data.count === -1) {
@@ -63,23 +58,20 @@ export function sendRequest(file, cb) {
             break
           case "A00006":
             const pid = json.data.pics.pic_1.pid
-            const url = {
-              large: pid2url(pid, "large"),
-              middle: pid2url(pid, "bmiddle"),
-              small: pid2url(pid, "small"),
-            }
-            save(url)
+            const url = pid2url(pid)
+            saveItem(url)
             cb(null, url)
             break
           default:
             cb(new Error("未知错误！"))
         }
-      },
-      error: (jqXHR, status, err) => {
-        cb(new Error(err))
-      },
-    })
+      })
+      .catch(error => {
+        cb(error)
+      })
   })
 }
 
 export const IconCopy = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAllBMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/f+/svYAAAAMXRSTlMAAQIDBQYHCAkLDBEUFRgZHh8gIUJFS1ZYYmNmjpSbnaCytMXO0dXZ2uTm6e/z+fv9ErSjVQAAAJ1JREFUGFeVzkkWgkAUQ9GAJYgWonxFbBDseyT735wDQCg9DnzDO8gJAADwtNa6h3ZqS5IsVMu6e9K2bY/9xpzDbkIAqoXucdOREn0/CIKhApxTaqHCJ0nyDCQkyQuAMYsZACGQxyISuoB+zLMaKeX04L5A+oHebYkvXJMkpybmkYiMLBOp698/8coyA91QRERMrPoDI6mKG1zxXYIX1fwXXesnfg0AAAAASUVORK5CYII="
+
+export const IconRemove = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAARVBMVEUAAAAAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/cAh/d7s64wAAAAFnRSTlMAAQMECAoRFBgmWHudvMXHzN7m8fP9sGJYjAAAAG9JREFUGFeFz8kWwBAMQNGgk5bO8v+f2iiHRBe1MNyNPADtjx7KsmGhXXvEqjYgkg4XVo2GqwYYqyYz8VqUWVFhWU9pWRsjvaNtwtIfbN5qUl/beUWZj1WwmX/apm+bAeXatplO5WRbNFLR0fEHXw/Y0g0Vul7qvgAAAABJRU5ErkJggg=="

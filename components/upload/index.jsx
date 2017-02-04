@@ -12,6 +12,8 @@ import "sweetalert/dist/sweetalert.css"
 import swal from "sweetalert"
 import { pid2url, sendRequest, IconCopy } from "utils"
 import Clipboard from "clipboard"
+import Loading from "components/_loading"
+import toastr from "toastr"
 
 export default class Upload extends React.Component {
   state = {
@@ -110,67 +112,39 @@ export default class Upload extends React.Component {
 class Item extends React.Component {
   static propTypes = {
     file: React.PropTypes.object.isRequired,
-    url: React.PropTypes.object,
+    url: React.PropTypes.string,
   }
 
-  componentDidMount() {
-    this.clipboard = new Clipboard(".upload__copy-btn", {
+  onRenderResult = ele => {
+    if(ele == null) {
+      this.clipboard.destroy()
+      return
+    }
+    this.clipboard = new Clipboard(ele, {
       target: function(trigger) {
-        return trigger.parentNode.children[1]
+        return trigger.parentNode.children[0]
       },
+    })
+    this.clipboard.on("success", function() {
+      toastr.success("拷贝成功")
     })
   }
 
-  componentWillUnmount() {
-    this.clipboard.destroy()
-  }
-
-  handleClick(evt) {
-    evt.stopPropagation()
-  }
-
-  renderResults() {
-    const url = this.props.url
+  renderResult = () => {
     return (
-      <ul
-        ref="results"
-        className="upload__item__results"
-        onClick={ this.handleClick }
+      <div
+        className="upload__item__result"
       >
-        <li>
-          <span>大图</span>
-          <span>
-            { url.large }
-          </span>
-          <img
-            title="复制URL"
-            src={ IconCopy }
-            className="upload__copy-btn"
-          />
-        </li>
-        <li>
-          <span>中图</span>
-          <span>
-            { url.middle }
-          </span>
-          <img
-            title="复制URL"
-            src={ IconCopy }
-            className="upload__copy-btn"
-          />
-        </li>
-        <li>
-          <span>小图</span>
-          <span>
-            { url.small }
-          </span>
-          <img
-            title="复制URL"
-            src={ IconCopy }
-            className="upload__copy-btn"
-          />
-        </li>
-      </ul>
+        <span>
+          { this.props.url }
+        </span>
+
+        <img
+          title="复制URL"
+          src={ IconCopy }
+          ref={ this.onRenderResult }
+        />
+      </div>
     )
   }
 
@@ -178,16 +152,22 @@ class Item extends React.Component {
     return (
       <div
         className="upload__item"
-        onClick={ this.handleClick }
+        // prevent file dialog showing
+        onClick={ evt => evt.stopPropagation() }
       >
         <img src={ this.props.file.preview } />
+
         {
           this.props.url ?
-            this.renderResults()
+            this.renderResult()
             :
-            <span className="upload__item__status">
-              上传中...
-            </span>
+            <div className="upload__loading">
+              <Loading />
+
+              <span>
+                上传中...
+              </span>
+            </div>
         }
       </div>
     )
