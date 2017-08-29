@@ -1,12 +1,10 @@
-#图床on微博
+# 图床on微博
 
 基于微博的图床。
 
 **PS: 基于微博的图床优点是使用方便，登陆微博即可。但是缺点是对图片无法完全控制，同时接口不稳定。无法获取所有已上传图片的列表，无法删除上传的图片等。如果有这方面的需求，可以使用[图床on七牛](https://github.com/fate-lovely/pic-on-qiniu)，使用七牛作为存储空间，图片处于完全控制之中。**
 
 ![](http://ww1.sinaimg.cn/large/9b85365dgy1fcel5ctxmwg20z20gramg)
-
-
 
 ## 安装
 
@@ -18,7 +16,7 @@
 
 点击仓库右上角的**Clone or download**下载仓库，打开Chrome[扩展程序设置页面](chrome://extensions/)，勾选**开发者模式**，将下载文件中的**chrome**文件夹拖入即可安装。
 
-##功能
+## 功能
 
 - 拖拽上传，复制上传（使用QQ截图以后可以直接使用Ctrl+V上传）
 - 批量上传
@@ -28,7 +26,7 @@
 **注意： 图片一旦上传，无法删除（可能一直保留到微博倒闭那天），请不要上传任何隐私图片。**
 
 
-##开发
+## 开发
 
 - `git clone https://github.com/fate-lovely/pic-on-weibo  `
 - `cd pic-on-weibo`
@@ -43,7 +41,7 @@
 
 打包成chrome插件时，我们可以申请跨域请求权限。具体参考[chrome跨域](http://stackoverflow.com/questions/9421933/cross-origin-xmlhttprequest-in-chrome-extensions/9422216#9422216)
 
-##说明
+## 说明
 
 - 图片上传接口？
 
@@ -56,8 +54,6 @@
 - 上传错误？
 
   微博方面的接口可能不稳定或者修改返回数据结构。遇到这种情况，请[提Issues](https://github.com/fate-lovely/pic-on-weibo/issues)。
-
-
 
 ## 致谢
 
