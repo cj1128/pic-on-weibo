@@ -1,10 +1,16 @@
+<div align="center">
+  <img width="80px" src="http://ww1.sinaimg.cn/large/9b85365dgy1fr6fy6vp24j203k03kwed">
+</div>
+
 # 图床on微博
 
 基于微博的图床。
 
-**PS: 基于微博的图床优点是使用方便，登陆微博即可。但是缺点是对图片无法完全控制，同时接口不稳定。无法获取所有已上传图片的列表，无法删除上传的图片等。如果有这方面的需求，可以使用[图床on七牛](https://github.com/fate-lovely/pic-on-qiniu)，使用七牛作为存储空间，图片处于完全控制之中。**
+**基于微博的图床优点是使用方便，登陆微博即可。但是缺点是对图片无法完全控制，无法获取所有已上传图片的列表，无法删除上传的图片等。如果有这方面的需求，可以使用[图床on七牛](https://github.com/fate-lovely/pic-on-qiniu)，使用七牛作为存储空间，图片处于完全控制之中。**
 
-![](http://ww1.sinaimg.cn/large/9b85365dgy1fcel5ctxmwg20z20gramg)
+<div align="center">
+  <img src="http://ww1.sinaimg.cn/large/9b85365dgy1fcel5ctxmwg20z20gramg">
+</div>
 
 ## 安装
 
@@ -22,9 +28,7 @@
 - 批量上传
 - 浏览历史记录（存储在localStorage中）
 
-
 **注意： 图片一旦上传，无法删除（可能一直保留到微博倒闭那天），请不要上传任何隐私图片。**
-
 
 ## 开发
 
@@ -34,12 +38,11 @@
 - `npm run dev`
 - `npm run build  // 打包代码` 
 
-
-**本地开发时，我们需要跨域调用微博上传接口，此时浏览器需要response header含有`Access-Control-Allow-Credentials`以及`Access-Control-Allow-Origin`这两个字段。这里使用[ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?utm_source=chrome-ntp-icon)插件来修改响应头。如图所示：**
+**本地开发时，我们需要跨域调用微博上传接口，此时浏览器需要response header含有`Access-Control-Allow-Credentials`以及`Access-Control-Allow-Origin`这两个字段。这里使用[ModHeader]插件来修改响应头。如图所示：**
 
 ![](http://ww3.sinaimg.cn/large/9b85365djw1f2f2e7te73j20gq07sq3f.jpg)
 
-打包成chrome插件时，我们可以申请跨域请求权限。具体参考[chrome跨域](http://stackoverflow.com/questions/9421933/cross-origin-xmlhttprequest-in-chrome-extensions/9422216#9422216)
+打包成chrome插件时，我们可以申请跨域请求权限。具体参考[Chrome跨域](http://stackoverflow.com/questions/9421933/cross-origin-xmlhttprequest-in-chrome-extensions/9422216#9422216)
 
 ## 说明
 
@@ -58,3 +61,5 @@
 ## 致谢
 
 部分代码参考[WeiboPicBed](https://github.com/Suxiaogang/WeiboPicBed)，在此表示感谢。
+
+[ModHeader]: https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj?utm_source=chrome-ntp-icon
